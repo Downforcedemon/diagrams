@@ -1,0 +1,19 @@
+flowchart TB
+    PSFT("PSFT") -->|"-invoices by dpt-"| REPORT_SAFE("REPORT SAFE")
+    PSFT -->|"-journal files(invoices)-"| ASERIES("A-SERIES")
+    ASERIES -->|"-DSD PO-"| DSD_SUPPLIER("DSD SUPPLIER")
+    ASERIES -->|"-build PO-"| SIM("SIM")
+    SIM -->|"-Order Guides-\n-Point & shoot-\n-CGO order file-"| BLUE_YONDER("BLUE YONDER")
+    BLUE_YONDER -->|"-end of day BOH-"| PMM("PMM")
+    PMM -->|"Promotions"| AMP("AMP")
+    PMM -->|"-CGO order gen-\n-Ambient-"| TRICEPS("TRICEPS")
+    TRICEPS -->|"-Orders-\n-BOL/shorts-"| MFC("MFC")
+    TRICEPS -->|"-invoices into pallets-\n-LP to TMS-"| TMS("TMS")
+    TMS -->|"Load planning"| DW("DW")
+    REPORT_SAFE -->|"-expected shipments from SIM-"| SIM
+    SIM --> MFC
+
+    classDef default fill:#000,stroke:#fff,stroke-width:2px;
+    classDef red fill:#f00,color:#fff,stroke:#fff,stroke-width:2px;
+    class PSFT,REPORT_SAFE,ASERIES,DSD_SUPPLIER,BLUE_YONDER,PMM,AMP,TRICEPS,MFC,TMS,DW default;
+    class SIM red;
